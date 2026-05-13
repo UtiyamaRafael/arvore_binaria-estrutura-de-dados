@@ -70,11 +70,11 @@ public class ArvoreBinaria {
                 case "folha":
                     removerFolha(conteudo);
                     break;
-                case "raiz":
-                    removerRaiz(conteudo);
+                case "FilhoR":
+                    removerFilhoR(conteudo);
                     break;
-                case "umFilho":
-                    remover1filho(conteudo);
+                case "FilhoL":
+                    removerFIlhoL(conteudo);
                     break;
                 case "doisFilhos":
                     remover2filho(conteudo);
@@ -88,7 +88,7 @@ public class ArvoreBinaria {
         return "a";
     }
 
-    public void removerRaiz(Integer conteudo){
+    public void removerFilhoR(Integer conteudo){
 
     }
 
@@ -96,7 +96,7 @@ public class ArvoreBinaria {
 
     }
 
-    public void remover1filho(Integer conteudo){
+    public void removerFilhoL(Integer conteudo){
 
     }
 
