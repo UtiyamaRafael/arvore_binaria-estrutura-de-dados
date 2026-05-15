@@ -45,7 +45,7 @@ public class ArvoreBinaria {
     }
 
     public void posOrdem(No no) {
-        
+
         if (no == null) {
             return;
         }
@@ -62,11 +62,13 @@ public class ArvoreBinaria {
         }
     }
 
+    // remover raiz
     public void remover(Integer conteudo) {
         if (estaVazia()) {
             return;
         } else {
             String tipoRemocao = remocaoTipo(conteudo);
+            System.out.println("O tipo de remoção será: " + tipoRemocao);
 
             switch (tipoRemocao) {
                 case "folha":
@@ -89,60 +91,46 @@ public class ArvoreBinaria {
     }
 
     public String remocaoTipo(Integer conteudo) {
+        No aux = this.raiz;
 
-        while (true) {
-            No aux = this.raiz;
-            
+        while (aux != null) {
+            if (conteudo.equals(aux.getConteudo())) {
+                // Encontrou o nó. verificar a estrutura
+                if (aux.getNoL() != null && aux.getNoR() != null) {
+                    return "doisFilhos";
+                } else if (aux.getNoL() != null) {
+                    return "umFilhoL";
+                } else if (aux.getNoR() != null) {
+                    return "umFilhoR";
+                } else {
+                    return "folha";
+                }
+            }
             if (conteudo < aux.getConteudo()) {
-                if (aux.getConteudo().equals(conteudo)) {
-                    if (aux.getNoL() != null && aux.getNoR() != null) {
-                        return "doisFilhos";
-                    } else if (aux.getNoL() != null && aux.getNoR() == null) {
-                        return "umFilhoL";
-                    } else if (aux.getNoR() != null && aux.getNoL() == null) {
-                        return "umFilhoR";
-                    } else {
-                        return "folha";
-                    }
-                } else {
-                    aux = aux.getNoL();
-                }
-            } else if (conteudo > aux.getConteudo()) {
-                if (aux.getConteudo().equals(conteudo)) {
-                    if (aux.getNoL() != null && aux.getNoR() != null) {
-                        return "doisFilhos";
-                    } else if (aux.getNoL() != null && aux.getNoR() == null) {
-                        return "umFilhoL";
-                    } else if (aux.getNoR() != null && aux.getNoL() == null) {
-                        return "umFilhoR";
-                    } else {
-                        return "folha";
-                    }
-                } else {
-                    aux = aux.getNoR();
-                }
+                aux = aux.getNoL();
             } else {
-                return "nóNaoEncontrado";
+                aux = aux.getNoR();
             }
         }
+
+        return "nóNaoEncontrado";
     }
 
     public void removerFolha(Integer conteudo) {
         No aux = this.raiz;
-
-        while (true) {
+        while (aux != null) {
             if (conteudo < aux.getConteudo()) {
-                if (aux.getNoL().equals(conteudo)) {
+                if (aux.getNoL().getConteudo().equals(conteudo)) {
                     aux.setNoL(null);
                     return;
-                } else {
-                    aux = aux.getNoL();
                 }
+                aux = aux.getNoL();
             } else if (conteudo > aux.getConteudo()) {
-                if (aux.getNoR().equals(conteudo)) {
-                    aux.setNoR(null);
-                    return;
-                } else {
+                if (aux.getNoR() != null) {
+                    if (aux.getNoR().getConteudo().equals(conteudo)) {
+                        aux.setNoR(null);
+                        return;
+                    }
                     aux = aux.getNoR();
                 }
             }

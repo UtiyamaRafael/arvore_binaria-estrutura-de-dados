@@ -6,8 +6,14 @@ public class Main {
         arvoreBinaria.inserir(5);
         arvoreBinaria.inserir(1);
         arvoreBinaria.inserir(7);
-        arvoreBinaria.inserir(5);
 
         arvoreBinaria.percurso();
+        
+        System.out.println("----------------------------");
+
+        arvoreBinaria.remover(7);
+        
+        arvoreBinaria.percurso();
+
     }
 }
