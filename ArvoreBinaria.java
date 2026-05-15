@@ -41,6 +41,7 @@ public class ArvoreBinaria {
     }
 
     public void percurso() {
+
         this.posOrdem(this.raiz);
     }
 
@@ -142,16 +143,16 @@ public class ArvoreBinaria {
     }
 
     public void remover1filhoL(Integer conteudo) {
-        No aux =  this.raiz;
+        No aux = this.raiz;
         while (aux != null) {
             if (conteudo < aux.getConteudo()) {
-                if (aux.getNoL() != null && aux.getNoL().getConteudo().equals(conteudo)){
+                if (aux.getNoL() != null && aux.getNoL().getConteudo().equals(conteudo)) {
                     aux.setNoL(aux.getNoL().getNoL());
                     return;
                 }
                 aux = aux.getNoL();
-            }else  if (conteudo > aux.getConteudo()) {
-                if (aux.getNoR() != null && aux.getNoR().getConteudo().equals(conteudo)){
+            } else if (conteudo > aux.getConteudo()) {
+                if (aux.getNoR() != null && aux.getNoR().getConteudo().equals(conteudo)) {
                     aux.setNoR(aux.getNoR().getNoL());
                     return;
                 }
@@ -161,16 +162,16 @@ public class ArvoreBinaria {
     }
 
     public void remover1filhoR(Integer conteudo) {
-        No aux =  this.raiz;
+        No aux = this.raiz;
         while (aux != null) {
             if (conteudo < aux.getConteudo()) {
-                if (aux.getNoR() != null && aux.getNoR().getConteudo().equals(conteudo)){
+                if (aux.getNoL() != null && aux.getNoL().getConteudo().equals(conteudo)) {
                     aux.setNoL(aux.getNoL().getNoR());
                     return;
                 }
                 aux = aux.getNoL();
-            }else  if (conteudo > aux.getConteudo()) {
-                if (aux.getNoR() != null && aux.getNoR().getConteudo().equals(conteudo)){
+            } else if (conteudo > aux.getConteudo()) {
+                if (aux.getNoR() != null && aux.getNoR().getConteudo().equals(conteudo)) {
                     aux.setNoR(aux.getNoR().getNoR());
                     return;
                 }
@@ -178,7 +179,57 @@ public class ArvoreBinaria {
             }
         }
     }
-    public void remover2filho(Integer conteudo) {
 
+    public void remover2filho(Integer conteudo) {
+        No aux = this.raiz;
+
+        if (conteudo.equals(this.raiz.getConteudo())) {
+            No suc = sucessor(conteudo);
+            this.raiz.setConteudo(suc.getConteudo());
+            remover1filhoR(suc.getConteudo());
+            return;
+        }
+
+        while (aux != null) {
+            if (conteudo < aux.getConteudo()) {
+                if (aux.getNoL().getConteudo().equals(conteudo)) {
+                    No removido = aux.getNoL();
+                    No suc = sucessor(conteudo);
+                    removido.setConteudo(suc.getConteudo());
+                    remover1filhoR(suc.getConteudo());
+                    return;
+                }
+                aux = aux.getNoL();
+            } else if (conteudo > aux.getConteudo()) {
+                if (aux.getNoR().getConteudo().equals(conteudo)) {
+                    No removido = aux.getNoR();
+                    No suc = sucessor(conteudo);
+                    removido.setConteudo(suc.getConteudo());
+                    remover1filhoR(suc.getConteudo());
+                    return;
+                }
+                aux = aux.getNoR();
+            }
+        }
+    }
+
+    private No sucessor(Integer conteudo) {
+        No alvo = this.raiz;
+        while (alvo != null) {
+            if (conteudo < alvo.getConteudo()) {
+                alvo = alvo.getNoL();
+            } else if (conteudo > alvo.getConteudo()) {
+                alvo = alvo.getNoR();
+            } else {
+                break; // encontrou
+            }
+        }
+
+        No atual = alvo.getNoR();
+        while (atual.getNoL() != null) {
+            atual = atual.getNoL();
+        }
+
+        return atual;
     }
 }
