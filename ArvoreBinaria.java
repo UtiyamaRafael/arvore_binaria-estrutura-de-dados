@@ -89,7 +89,7 @@ public class ArvoreBinaria {
                     System.out.println("Numero: " + conteudo + " removido com sucesso");
                     break;
                 case "noNaoEncontrado":
-                    System.out.println("Nó nao encontrado");
+                    System.out.println("No nao encontrado");
                     break;
             }
         }
@@ -118,7 +118,7 @@ public class ArvoreBinaria {
             }
         }
 
-        return "nóNaoEncontrado";
+        return "noNaoEncontrado";
     }
 
     public void removerFolha(Integer conteudo) {
