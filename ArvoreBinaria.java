@@ -125,19 +125,17 @@ public class ArvoreBinaria {
         No aux = this.raiz;
         while (aux != null) {
             if (conteudo < aux.getConteudo()) {
-                if (aux.getNoL().getConteudo().equals(conteudo)) {
+                if (aux.getNoL() != null && aux.getNoL().getConteudo().equals(conteudo)) {
                     aux.setNoL(null);
                     return;
                 }
                 aux = aux.getNoL();
             } else if (conteudo > aux.getConteudo()) {
-                if (aux.getNoR() != null) {
-                    if (aux.getNoR().getConteudo().equals(conteudo)) {
+                    if (aux.getNoR() != null && aux.getNoR().getConteudo().equals(conteudo)) {
                         aux.setNoR(null);
                         return;
                     }
                     aux = aux.getNoR();
-                }
             }
         }
     }
@@ -182,30 +180,46 @@ public class ArvoreBinaria {
 
     public void remover2filho(Integer conteudo) {
         No aux = this.raiz;
-
         if (conteudo.equals(this.raiz.getConteudo())) {
             No suc = sucessor(conteudo);
-            this.raiz.setConteudo(suc.getConteudo());
-            remover1filhoR(suc.getConteudo());
+            Integer valorSuc = suc.getConteudo();
+            if (remocaoTipo(valorSuc).equals("folha")) {
+                removerFolha(valorSuc);
+            } else {
+                remover1filhoR(valorSuc);
+            }
+            this.raiz.setConteudo(valorSuc);
             return;
         }
-
         while (aux != null) {
             if (conteudo < aux.getConteudo()) {
-                if (aux.getNoL().getConteudo().equals(conteudo)) {
+                if (aux.getNoL() != null &&
+                        aux.getNoL().getConteudo().equals(conteudo)) {
                     No removido = aux.getNoL();
                     No suc = sucessor(conteudo);
-                    removido.setConteudo(suc.getConteudo());
-                    remover1filhoR(suc.getConteudo());
+                    Integer valorSuc = suc.getConteudo();
+                    if (remocaoTipo(valorSuc).equals("folha")) {
+                        removerFolha(valorSuc);
+                    } else {
+                        remover1filhoR(valorSuc);
+                    }
+                    removido.setConteudo(valorSuc);
                     return;
                 }
                 aux = aux.getNoL();
-            } else if (conteudo > aux.getConteudo()) {
-                if (aux.getNoR().getConteudo().equals(conteudo)) {
+            }
+            else if (conteudo > aux.getConteudo()) {
+                if (aux.getNoR() != null &&
+                        aux.getNoR().getConteudo().equals(conteudo)) {
                     No removido = aux.getNoR();
                     No suc = sucessor(conteudo);
-                    removido.setConteudo(suc.getConteudo());
-                    remover1filhoR(suc.getConteudo());
+                    Integer valorSuc = suc.getConteudo();
+                    if (remocaoTipo(valorSuc).equals("folha")) {
+                        removerFolha(valorSuc);
+                    } else {
+                        remover1filhoR(valorSuc);
+                    }
+                    removido.setConteudo(valorSuc);
                     return;
                 }
                 aux = aux.getNoR();
