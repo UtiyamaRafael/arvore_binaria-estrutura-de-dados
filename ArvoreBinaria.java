@@ -123,6 +123,11 @@ public class ArvoreBinaria {
 
     public void removerFolha(Integer conteudo) {
         No aux = this.raiz;
+        //se raiz for folha
+        if (conteudo.equals(this.raiz.getConteudo())) {
+            this.raiz=null;
+            return;
+        }
         while (aux != null) {
             if (conteudo < aux.getConteudo()) {
                 if (aux.getNoL() != null && aux.getNoL().getConteudo().equals(conteudo)) {
