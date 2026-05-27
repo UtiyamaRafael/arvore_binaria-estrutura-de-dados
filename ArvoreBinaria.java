@@ -147,6 +147,12 @@ public class ArvoreBinaria {
 
     public void remover1filhoL(Integer conteudo) {
         No aux = this.raiz;
+
+        if(this.raiz.getConteudo().equals(conteudo)) {
+            this.raiz = this.raiz.getNoL();
+            return;
+        }
+        
         while (aux != null) {
             if (conteudo < aux.getConteudo()) {
                 if (aux.getNoL() != null && aux.getNoL().getConteudo().equals(conteudo)) {
@@ -166,6 +172,12 @@ public class ArvoreBinaria {
 
     public void remover1filhoR(Integer conteudo) {
         No aux = this.raiz;
+
+        if(this.raiz.getConteudo().equals(conteudo)) {
+            this.raiz = this.raiz.getNoR();
+            return;
+        }
+        
         while (aux != null) {
             if (conteudo < aux.getConteudo()) {
                 if (aux.getNoL() != null && aux.getNoL().getConteudo().equals(conteudo)) {
